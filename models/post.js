@@ -13,6 +13,13 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
         alias: 'a'
+    },
+    email: {
+        type: String,
+        required: true,
+        alias: 'e',
+        unique: true
     }
 })
+
 export default mongoose.model('Post', postSchema, 'posts') //name of the model

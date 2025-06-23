@@ -29,7 +29,8 @@ app.post('/posts', async (req, res) => {
         const postDoc = new Post({
             author: req.body.author,
             title: req.body.title,
-            body: req.body.body
+            body: req.body.body,
+            email: req.body.email
         })
         const result = await postDoc.save()
         //Alternative;
