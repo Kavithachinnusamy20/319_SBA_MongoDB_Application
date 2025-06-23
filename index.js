@@ -26,12 +26,44 @@ app.get('/posts', async (req, res) => {
 app.post('/posts', async (req, res) => {
     console.log(req.body)
     const postDoc = new Post({
-        author: req.body.author
+        author: req.body.author,
+        title: req.body.title,
+        body: req.body.body
     })
     const result = await postDoc.save()
     //Alternative;
     //const result =await Post.create({author:req.body.author})
     res.json(result)
+})
+
+
+app.delete('/posts/:id', async (req, res) => {
+    console.log(req.params.id)
+
+    const result = await Post.findByIdAndDelete(req.params.id)
+
+    if (!result) {
+        return res.status(404).send({ message: 'Item not found' });
+    }
+    res.send({ message: 'Item deleted successfully', Post: result });
+})
+
+
+app.patch('/posts/:id', async (req, res) => {
+    console.log(req.params.id)
+    try {
+        const resultUpdate = await Post.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        )
+        if (!resultUpdate) {
+            return res.status(404).send({ message: 'Item not found' });
+        }
+        res.send({ message: 'Item updated successfully', Post: resultUpdate });
+    } catch (error) {
+        return res.status(500).send({ message: 'Error while updating item', error });
+    }
 })
 
 
