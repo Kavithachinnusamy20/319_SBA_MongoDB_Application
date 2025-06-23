@@ -24,28 +24,35 @@ app.get('/posts', async (req, res) => {
 })
 
 app.post('/posts', async (req, res) => {
-    console.log(req.body)
-    const postDoc = new Post({
-        author: req.body.author,
-        title: req.body.title,
-        body: req.body.body
-    })
-    const result = await postDoc.save()
-    //Alternative;
-    //const result =await Post.create({author:req.body.author})
-    res.json(result)
+    try {
+        console.log(req.body)
+        const postDoc = new Post({
+            author: req.body.author,
+            title: req.body.title,
+            body: req.body.body
+        })
+        const result = await postDoc.save()
+        //Alternative;
+        //const result =await Post.create({author:req.body.author})
+        res.json(result)
+    } catch (error) {
+        return res.status(500).send({ message: 'Error while inserting item', error });
+    }
 })
 
 
 app.delete('/posts/:id', async (req, res) => {
     console.log(req.params.id)
+    try {
+        const result = await Post.findByIdAndDelete(req.params.id)
 
-    const result = await Post.findByIdAndDelete(req.params.id)
-
-    if (!result) {
-        return res.status(404).send({ message: 'Item not found' });
+        if (!result) {
+            return res.status(404).send({ message: 'Item not found' });
+        }
+        res.send({ message: 'Item deleted successfully', Post: result });
+    } catch (error) {
+        return res.status(500).send({ message: 'Error while deleting item', error });
     }
-    res.send({ message: 'Item deleted successfully', Post: result });
 })
 
 
