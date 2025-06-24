@@ -1,8 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import Post from './models/post.js'
-import User from './models/user.js'
-import Patch from './models/patch.js'
+// import User from './models/user.js'
+// import Patch from './models/patch.js'
 
 import 'dotenv/config'
 
