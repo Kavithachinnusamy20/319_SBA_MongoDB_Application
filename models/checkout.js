@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const postSchema = new mongoose.Schema({
-  title: {
+const checkOutSchema = new mongoose.Schema({
+ title : {
     type: String,
     required: true
   },
@@ -19,4 +19,4 @@ const postSchema = new mongoose.Schema({
   }
 }
 });
-export default mongoose.model('Patch', postSchema, 'patch');
+export default mongoose.model('checkOut', checkOutSchema);
