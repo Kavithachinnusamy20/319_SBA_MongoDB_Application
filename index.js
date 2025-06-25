@@ -78,8 +78,6 @@ app.patch('/posts/:id', async (req, res) => {
     }
 })
 
-
-
 // Users schema POST APIs
 app.post('/users', async (req, res) => {
     try {
@@ -97,11 +95,6 @@ app.post('/users', async (req, res) => {
         return res.status(500).send({ message: 'Error while inserting item', error });
     }
 })
-
-
-
-
-
 // CheckOut schema POST APIs
 
 app.post('/checkOut', async (req, res) => {
@@ -122,10 +115,6 @@ app.post('/checkOut', async (req, res) => {
         return res.status(500).send({ message: 'Error while inserting item', error });
     }
 })
-
-
-
-
 // CheckOut schema PATCH APIs
 
 app.patch('/checkOut/:id', async (req, res) => {
