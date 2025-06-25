@@ -1,8 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import Post from './models/post.js'
-// import User from './models/user.js'
-// import Patch from './models/patch.js'
+import Post from './models/BookEntry.js'
+import User from './models/user.js'
+import Patch from './models/checkout.js'
 
 import 'dotenv/config'
 
@@ -32,8 +32,8 @@ app.post('/posts', async (req, res) => {
         const postDoc = new Post({
             author: req.body.author,
             title: req.body.title,
-            body: req.body.body,
-            email: req.body.email
+            genre: req.body.genre,
+           
         })
         const result = await postDoc.save()
         //Alternative;
@@ -76,6 +76,8 @@ app.patch('/posts/:id', async (req, res) => {
         return res.status(500).send({ message: 'Error while updating item', error });
     }
 })
+
+
 
 
 app.listen(PORT, () => {
